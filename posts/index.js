@@ -20,7 +20,7 @@ app.post("/posts", async (req, res) => {
 
   await axios
     .post("http://localhost:4005/events", {
-      type: "POSTCREATED",
+      type: "POST_CREATED",
       data: { id, title },
     })
     .catch((error) => {
