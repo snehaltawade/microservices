@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: snehaltawade/posts:latest #if we remove the latest and keep empty it assumes it is latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          # ports:
+          # - containerPort: <Port>
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-clusterip-srv
+spec:
+  selector:
+    app: posts # type:ClusterIp: is defualt hence not specified explicitly
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
