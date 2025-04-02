@@ -17,7 +17,7 @@ const handleEvent = (type, data) => {
     // posts[postId].comments.push({ id, content });
     const post = posts[postId];
     post.comments.push({ id, content, status });
-    // console.log("post afetr comment added", posts);
+    console.log("post afetr comment added queryy", posts);
   }
   if (type == "COMMENT_UPDATED") {
     const { id, content, postId, status } = data;
@@ -31,6 +31,7 @@ const handleEvent = (type, data) => {
   }
 };
 app.get("/posts", (req, res) => {
+  consol;
   res.send(posts);
 });
 const posts = {};

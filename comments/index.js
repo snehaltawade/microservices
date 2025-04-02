@@ -17,6 +17,8 @@ app.post("/posts/:id/comments", async (req, res) => {
   const { content } = req.body;
   const comments = commentsByPostId[req.params.id] || [];
   comments.push({ id: commentId, content, status: "pending" });
+  console.log("req.params.id---", req.params.id);
+  commentsByPostId[req.params.id] = comments;
   await axios
     .post("http://event-bus-srv:4005/events", {
       type: "COMMENT_CREATED",
@@ -28,9 +30,9 @@ app.post("/posts/:id/comments", async (req, res) => {
       },
     })
     .catch((error) => {
-      console.log("cannot post comment event");
+      console.log("cannot post comment event changed", error);
     });
-  commentsByPostId[req.params.id] = comments;
+
   res.status(201).send(comments);
 });
 
