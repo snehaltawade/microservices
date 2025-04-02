@@ -15,6 +15,8 @@ spec:
         - name: event-bus
           image: snehaltawade/event-bus:latest #if we remove the latest and keep empty it assumes it is latest
           resources:
+            requests:
+              cpu: "100m"
             limits:
               memory: "128Mi"
               cpu: "500m"
